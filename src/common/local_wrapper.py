@@ -2,13 +2,12 @@
 Here we implement our own poller.
 This is the equilvalent sqs-to-lambda integration AWS does under the hood.
 '''
-
 import time
 import traceback
 
 import boto3
-from box import Box
 import configargparse
+from box import Box
 
 from func import run
 from context import CustomContext

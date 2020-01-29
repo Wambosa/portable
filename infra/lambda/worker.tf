@@ -42,6 +42,6 @@ resource "aws_lambda_event_source_mapping" "worker" {
 }
 
 resource "aws_lambda_function_event_invoke_config" "worker" {
-  function_name           = aws_lambda_function.worker.function_name
-  maximum_retry_attempts  = 0
+  function_name          = aws_lambda_function.worker.function_name
+  maximum_retry_attempts = 0
 }
