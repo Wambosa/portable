@@ -1,6 +1,8 @@
 # Portable function pattern for the scaling business
 _example repository_
 
+[![CircleCI](https://circleci.com/gh/Wambosa/portable.svg?style=svg)](https://circleci.com/gh/Wambosa/portable)
+
 # Table of Contents
 
 * [C4 Diagrams](#c4-diagrams)

@@ -192,6 +192,20 @@ terminal map
 
 ![engineer feedback loops](https://s3.amazonaws.com/shondiaz.com/img/portable-feedback-loop.gif)
 
+#### Terminal 3
+_(mock infrastructure s3/sqs/mysql)_
+```
+make shim
+```
+
+This command creates a docker network containing a fake aws environment configured with relevant components.
+It also creates an actual mysql database that our app will point to.
+These resources are isolated and will not overlap with other developers working at the same time 
+_(may seem like a silly thing to point out, but many shops do not have this luxury)_.
+Even if the shop does not use aws or mysql, this command is responsible for knowing what needs to be shimmed and does so.
+Any stack choices ought to be considered in light of how complex it is to mock. 
+Who ever selects the stack ought to be able to additionally write a `make shim` command as a part of a spike or other investigation.
+
 
 #### Terminal 1
 _the worker (or whatever program that needs testing)_
@@ -231,21 +245,6 @@ The second terminal is the cli playground which allows a window into the system.
 This can be used for both viewing results and simulating events. 
 In the above gif example, we have a simulated s3->sqs event, 
 then a database is connected to in order to validate the results of the local app code.
-
-
-#### Terminal 3
-_(mock infrastructure s3/sqs/mysql)_
-```
-make shim
-```
-
-This command creates a docker network containing a fake aws environment configured with relevant components.
-It also creates an actual mysql database that our app will point to.
-These resources are isolated and will not overlap with other developers working at the same time 
-_(may seem like a silly thing to point out, but many shops do not have this luxury)_.
-Even if the shop does not use aws or mysql, this command is responsible for knowing what needs to be shimmed and does so.
-Any stack choices ought to be considered in light of how complex it is to mock. 
-Who ever selects the stack ought to be able to additionally write a `make shim` command as a part of a spike or other investigation.
 
 
 #### Terminal 4
