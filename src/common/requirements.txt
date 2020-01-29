@@ -1,0 +1,4 @@
+python-box==3.2.4
+pyyaml==5.1
+ConfigArgParse==0.14.0
+PyMySQL==0.9.3

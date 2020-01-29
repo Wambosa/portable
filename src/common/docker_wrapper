@@ -1,0 +1,8 @@
+FROM python:3.7
+RUN pip3 install boto3==1.9.138
+ARG FUNC_BUILD_DIR
+RUN mkdir /app
+WORKDIR /app
+COPY $FUNC_BUILD_DIR ./
+RUN pip install -r requirements.txt
+ENTRYPOINT ["python3", "-u", "./main.py" ]

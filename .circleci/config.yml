@@ -1,0 +1,55 @@
+version: 2
+jobs:
+  test:
+    docker:
+    - image: circleci/python:3.7
+    steps:
+    - checkout
+    - run: make circleci
+    - run: make build TARGET=role
+    - run: make build TARGET=network
+    - run: make build TARGET=queue
+    - run: make build TARGET=aurora
+    - run: make build TARGET=layer
+    - run: make build TARGET=lambda
+    - run: make test
+    - run: make lint
+
+  deploy:
+    docker:
+    - image: circleci/python:3.7
+    steps:
+    - checkout
+    - run: make circleci
+    - run: make build TARGET=role
+    - run: make build TARGET=network
+    - run: make build TARGET=queue
+    - run: make build TARGET=aurora
+    - run: make build TARGET=layer
+    - run: make build TARGET=lambda
+    - run: make deploy TARGET=role
+    - run: make deploy TARGET=network
+    - run: make deploy TARGET=queue
+    - run: make deploy TARGET=aurora
+    - run: make deploy TARGET=layer
+    - run: make deploy TARGET=lambda
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - test:
+          context: lab
+          filters:
+            branches:
+              ignore: master
+
+  deploy-prod:
+    jobs:
+      - deploy:
+          context: prod
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /[0-9]+(\.[0-9]+)*/

@@ -1,0 +1,13 @@
+---
+
+newline: "\n"
+
+delimiter: ","
+
+db_name: activity
+
+insert_statement: >-
+  INSERT INTO `clicks`
+    (`identity`, `url`, `type`, `timestamp`, `coordinates`)
+  VALUES
+    (%s, %s, %s, %s, %s);

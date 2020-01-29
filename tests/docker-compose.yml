@@ -1,0 +1,33 @@
+version: '3'
+services:
+  db:
+    build:
+      context: ../
+      dockerfile: ./tests/.docker/db/Dockerfile
+    image: example-db
+    hostname: 127.0.0.1
+    ports:
+      - 13306:3306
+    networks:
+      - backend
+    environment:
+      MYSQL_DATABASE: activity
+      MYSQL_ROOT_PASSWORD: password
+  localstack:
+    image: localstack/localstack
+    ports:
+      - 4572:4572
+      - 4576:4576
+    networks:
+      - backend
+    environment:
+      SERVICES: s3,sqs
+      AWS_ACCESS_KEY_ID: fake
+      AWS_SECRET_ACCESS_KEY: fake
+      AWS_DEFAULT_REGION: us-east-1
+    volumes:
+      - ../tests/.docker/localstack:/docker-entrypoint-initaws.d
+
+networks: 
+  backend:
+    driver: bridge

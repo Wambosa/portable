@@ -1,0 +1,4 @@
+{
+  "deadLetterTargetArn": "arn:aws:sqs:${region}:${account_id}:${queue_name}",
+  "maxReceiveCount": ${max_receive}
+}
